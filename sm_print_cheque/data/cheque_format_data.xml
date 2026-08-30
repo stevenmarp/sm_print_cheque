@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="sm_cheque_format_default" model="sm.cheque.format">
+        <field name="name">Axis Bank</field>
+        <field name="default_template" eval="True"/>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="font_size">13.0</field>
+        <field name="color">#000</field>
+        <field name="print_cheque_background" eval="True"/>
+        <field name="print_partner" eval="True"/>
+        <field name="partner_top">130.0</field>
+        <field name="partner_left">70.0</field>
+        <field name="print_date" eval="True"/>
+        <field name="date_top">92.0</field>
+        <field name="print_amount" eval="True"/>
+        <field name="amount_top">174.0</field>
+        <field name="amount_left">552.0</field>
+        <field name="print_amount_words" eval="True"/>
+        <field name="split_words_after">7</field>
+        <field name="words_first_top">152.0</field>
+        <field name="words_first_left">70.0</field>
+        <field name="words_second_top">176.0</field>
+        <field name="words_second_left">70.0</field>
+        <field name="print_company" eval="True"/>
+        <field name="company_top">266.0</field>
+        <field name="company_left">560.0</field>
+        <field name="print_cheque_no" eval="True"/>
+        <field name="cheque_no_top">58.0</field>
+        <field name="cheque_no_left">510.0</field>
+        <field name="print_ac_pay" eval="True"/>
+        <field name="ac_pay_top">104.0</field>
+        <field name="ac_pay_left">70.0</field>
+        <field name="print_first_signature" eval="True"/>
+        <field name="first_signature_top">238.0</field>
+        <field name="first_signature_left">500.0</field>
+        <field name="print_free_text_one" eval="True"/>
+        <field name="free_text_one_top">250.0</field>
+        <field name="free_text_one_left">70.0</field>
+        <field name="print_free_text_two" eval="True"/>
+        <field name="free_text_two_top">250.0</field>
+        <field name="free_text_two_left">300.0</field>
+        <field name="print_stub" eval="True"/>
+        <field name="stub_top">360.0</field>
+        <field name="stub_left">35.0</field>
+    </record>
+</odoo>

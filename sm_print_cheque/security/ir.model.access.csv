@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sm_cheque_format_user,sm.cheque.format.user,model_sm_cheque_format,account.group_account_invoice,1,0,0,0
+access_sm_cheque_format_manager,sm.cheque.format.manager,model_sm_cheque_format,account.group_account_manager,1,1,1,1
+access_sm_print_cheque_wizard,sm.print.cheque.wizard,model_sm_print_cheque_wizard,account.group_account_invoice,1,1,1,1

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_move_form_print_cheque" model="ir.ui.view">
+        <field name="name">account.move.form.print.cheque</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <button name="preview_invoice" position="after">
+                <button name="action_sm_print_cheque"
+                        type="object"
+                        string="Print Cheque"
+                        groups="account.group_account_invoice"
+                        invisible="state != 'posted' or payment_state not in ('paid', 'in_payment', 'partial') or move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')"/>
+            </button>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sm_cheque_format_list" model="ir.ui.view">
+        <field name="name">sm.cheque.format.list</field>
+        <field name="model">sm.cheque.format</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="font_size"/>
+                <field name="color"/>
+                <field name="default_template"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sm_cheque_format_form" model="ir.ui.view">
+        <field name="name">sm.cheque.format.form</field>
+        <field name="model">sm.cheque.format</field>
+        <field name="arch" type="xml">
+            <form string="Cheque Format">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Cheque Name"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="font_size"/>
+                            <field name="color"/>
+                        </group>
+                        <group>
+                            <field name="default_template"/>
+                            <field name="company_id"/>
+                            <field name="page_width"/>
+                            <field name="page_height"/>
+                            <field name="print_cheque_background"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print Partner"/>
+                    <group>
+                        <group>
+                            <field name="print_partner"/>
+                            <field name="partner_font_bold"/>
+                            <field name="partner_title_position"/>
+                        </group>
+                        <group>
+                            <field name="partner_top"/>
+                            <field name="partner_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print Address"/>
+                    <group>
+                        <group>
+                            <field name="print_customer_address"/>
+                        </group>
+                        <group>
+                            <field name="address_top"/>
+                            <field name="address_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print Date"/>
+                    <group>
+                        <group>
+                            <field name="print_date"/>
+                            <field name="date_separator"/>
+                            <field name="date_format"/>
+                            <field name="year_format"/>
+                            <field name="date_top"/>
+                        </group>
+                        <group string="Date Digit From Left">
+                            <field name="date_first_left"/>
+                            <field name="date_second_left"/>
+                            <field name="date_third_left"/>
+                            <field name="date_fourth_left"/>
+                            <field name="date_fifth_left"/>
+                            <field name="date_sixth_left"/>
+                            <field name="date_seventh_left"/>
+                            <field name="date_eighth_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Amount In Digit"/>
+                    <group>
+                        <group>
+                            <field name="print_amount"/>
+                            <field name="print_currency"/>
+                            <field name="print_amount_star"/>
+                        </group>
+                        <group>
+                            <field name="amount_top"/>
+                            <field name="amount_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Amount In Words"/>
+                    <group>
+                        <group>
+                            <field name="print_amount_words"/>
+                            <field name="print_words_star"/>
+                            <field name="amount_words_font_bold"/>
+                            <field name="split_words_after"/>
+                        </group>
+                        <group>
+                            <field name="words_first_top"/>
+                            <field name="words_first_left"/>
+                            <field name="words_second_top"/>
+                            <field name="words_second_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Decimal Format"/>
+                    <group>
+                        <field name="decimal_format"/>
+                        <field name="print_only_word"/>
+                    </group>
+
+                    <separator string="Print Company"/>
+                    <group>
+                        <group><field name="print_company"/></group>
+                        <group>
+                            <field name="company_top"/>
+                            <field name="company_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print Cheque No"/>
+                    <group>
+                        <group><field name="print_cheque_no"/></group>
+                        <group>
+                            <field name="cheque_no_top"/>
+                            <field name="cheque_no_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print A/C Pay"/>
+                    <group>
+                        <group><field name="print_ac_pay"/></group>
+                        <group>
+                            <field name="ac_pay_top"/>
+                            <field name="ac_pay_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print First Signature"/>
+                    <group>
+                        <group><field name="print_first_signature"/></group>
+                        <group>
+                            <field name="first_signature_top"/>
+                            <field name="first_signature_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print Second Signature"/>
+                    <group>
+                        <group><field name="print_second_signature"/></group>
+                        <group>
+                            <field name="second_signature_top"/>
+                            <field name="second_signature_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print Free Text One"/>
+                    <group>
+                        <group><field name="print_free_text_one"/></group>
+                        <group>
+                            <field name="free_text_one_top"/>
+                            <field name="free_text_one_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print Free Text Two"/>
+                    <group>
+                        <group><field name="print_free_text_two"/></group>
+                        <group>
+                            <field name="free_text_two_top"/>
+                            <field name="free_text_two_left"/>
+                        </group>
+                    </group>
+
+                    <separator string="Print Stub"/>
+                    <group>
+                        <group><field name="print_stub"/></group>
+                        <group>
+                            <field name="stub_top"/>
+                            <field name="stub_left"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sm_cheque_format" model="ir.actions.act_window">
+        <field name="name">Cheque Formats</field>
+        <field name="res_model">sm.cheque.format</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_sm_cheque_format"
+              name="Cheque Formats"
+              parent="account.account_invoicing_menu"
+              action="action_sm_cheque_format"
+              sequence="90"
+              groups="account.group_account_manager"/>
+</odoo>

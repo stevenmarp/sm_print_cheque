@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_cheque_document">
+        <t t-set="fmt" t-value="doc.cheque_format_id"/>
+        <t t-set="payment" t-value="doc.payment_id"/>
+        <div class="page" t-att-style="'position:relative; width:%spx; min-height:%spx; font-family:Arial, Helvetica, sans-serif; color:#111;' % (fmt.page_width * 3.78, fmt.page_height * 3.78)">
+            <img t-if="fmt.print_cheque_background"
+                 t-att-src="fmt._sm_background_data_uri()"
+                 style="position:absolute; top:22px; left:35px; width:750px; height:300px; opacity:.62; z-index:0;"/>
+            <div t-if="fmt.print_ac_pay" t-att-style="fmt._sm_style(fmt.ac_pay_top, fmt.ac_pay_left, extra='font-size:12px; font-weight:700; transform:rotate(-45deg); transform-origin:left top;')">A/C PAY</div>
+            <div t-if="fmt.print_cheque_no" t-att-style="fmt._sm_style(fmt.cheque_no_top, fmt.cheque_no_left, extra='font-size:12px;')">Cheque No. <span t-out="doc._sm_cheque_no()"/></div>
+            <t t-if="fmt.print_date">
+                <t t-foreach="doc._sm_date_digits()" t-as="digit">
+                    <span t-att-style="digit['style']" t-out="digit['char']"/>
+                </t>
+            </t>
+            <div t-if="fmt.print_partner" t-att-style="fmt._sm_style(fmt.partner_top, fmt.partner_left, fmt.partner_font_bold, extra='font-size:12px; max-width:430px; white-space:nowrap; overflow:hidden;')">
+                <span style="display:inline-block; min-width:40px;">Pay</span>
+                <span t-out="doc._sm_partner_name()"/>
+            </div>
+            <div t-if="fmt.print_customer_address and payment.partner_id" t-att-style="fmt._sm_style(fmt.address_top, fmt.address_left, extra='white-space:pre-line;')" t-out="payment.partner_id.contact_address"/>
+            <div t-if="fmt.print_amount" t-att-style="fmt._sm_style(fmt.amount_top, fmt.amount_left, extra='font-size:12px; font-weight:700; min-width:130px; text-align:right;')" t-out="doc._sm_payment_amount()"/>
+            <t t-if="fmt.print_amount_words">
+                <t t-set="word_lines" t-value="doc._sm_amount_words_lines()"/>
+                <div t-att-style="fmt._sm_style(fmt.words_first_top, fmt.words_first_left, fmt.amount_words_font_bold, extra='font-size:12px; max-width:510px; white-space:nowrap;')" t-out="word_lines[0]"/>
+                <div t-if="word_lines[1]" t-att-style="fmt._sm_style(fmt.words_second_top, fmt.words_second_left, fmt.amount_words_font_bold, extra='font-size:12px; max-width:510px; white-space:nowrap;')" t-out="word_lines[1]"/>
+            </t>
+            <div t-if="fmt.print_free_text_one and doc.free_text" t-att-style="fmt._sm_style(fmt.free_text_one_top, fmt.free_text_one_left, extra='font-size:12px;')" t-out="doc.free_text"/>
+            <div t-if="fmt.print_free_text_two and doc.free_text_two" t-att-style="fmt._sm_style(fmt.free_text_two_top, fmt.free_text_two_left, extra='font-size:12px;')" t-out="doc.free_text_two"/>
+            <div t-if="fmt.print_company" t-att-style="fmt._sm_style(fmt.company_top, fmt.company_left, extra='font-size:11px; min-width:160px; text-align:center;')" t-out="payment.company_id.name"/>
+            <div t-if="fmt.print_first_signature" t-att-style="fmt._sm_style(fmt.first_signature_top, fmt.first_signature_left, extra='font-size:11px; min-width:160px; border-top:1px solid #555; text-align:center; padding-top:5px;')">Authorised Signature</div>
+            <div t-if="fmt.print_second_signature" t-att-style="fmt._sm_style(fmt.second_signature_top, fmt.second_signature_left, extra='font-size:11px; min-width:160px; border-top:1px solid #555; text-align:center; padding-top:5px;')">Second Signature</div>
+
+            <div t-if="fmt.print_stub" t-att-style="fmt._sm_style(fmt.stub_top, fmt.stub_left, extra='right:10px; font-size:12px;')">
+                <table style="width:100%; border-collapse:collapse; margin-bottom:14px;">
+                    <tr>
+                        <td style="width:35%; padding:3px 0;">Cheque No. <span t-out="doc._sm_cheque_no()"/></td>
+                        <td style="width:30%; padding:3px 0; text-align:center; font-weight:700;" t-out="payment.partner_id.display_name"/>
+                        <td style="width:35%; padding:3px 0; text-align:right;">Date: <span t-out="doc._sm_format_date(payment.date)"/></td>
+                    </tr>
+                </table>
+                <table style="width:100%; border-collapse:collapse; margin-bottom:54px; table-layout:fixed;">
+                    <thead>
+                        <tr style="border-bottom:2px solid #222;">
+                            <th style="text-align:left; padding:5px 6px; width:22%;">Date</th>
+                            <th style="text-align:left; padding:5px 6px; width:20%;">Type</th>
+                            <th style="text-align:left; padding:5px 6px; width:34%;">Reference</th>
+                            <th style="text-align:right; padding:5px 6px; width:24%;">Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc._sm_payment_stub_lines()" t-as="line">
+                            <td style="padding:5px 6px;" t-out="doc._sm_format_date(line['date'])"/>
+                            <td style="padding:5px 6px;" t-out="line['type']"/>
+                            <td style="padding:5px 6px;" t-out="line['reference']"/>
+                            <td style="text-align:right; padding:5px 6px;">
+                                <span t-out="line['payment']"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width:100%; border-collapse:collapse; table-layout:fixed; font-size:11px;">
+                    <thead>
+                        <tr style="border-bottom:1px solid #555;">
+                            <th style="text-align:left; padding:5px 6px; width:22%;">Description</th>
+                            <th style="text-align:left; padding:5px 6px; width:10%;">Date</th>
+                            <th style="text-align:left; padding:5px 6px; width:16%;">Partner</th>
+                            <th style="text-align:left; padding:5px 6px; width:20%;">Account</th>
+                            <th style="text-align:right; padding:5px 6px; width:16%;">Credit</th>
+                            <th style="text-align:right; padding:5px 6px; width:16%;">Debit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc._sm_journal_lines()" t-as="line" style="vertical-align:top;">
+                            <td style="padding:5px 6px; word-break:break-word;" t-out="line.name or line.move_id.name"/>
+                            <td style="padding:5px 6px;" t-out="doc._sm_format_date(line.date)"/>
+                            <td style="padding:5px 6px; word-break:break-word;" t-out="line.partner_id.display_name"/>
+                            <td style="padding:5px 6px; word-break:break-word;" t-out="line.account_id.display_name"/>
+                            <td style="text-align:right; padding:5px 6px; white-space:nowrap;">
+                                <span t-out="doc._sm_format_money(line.credit, line.company_currency_id)"/>
+                            </td>
+                            <td style="text-align:right; padding:5px 6px; white-space:nowrap;">
+                                <span t-out="doc._sm_format_money(line.debit, line.company_currency_id)"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_cheque">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sm_print_cheque.report_cheque_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>
